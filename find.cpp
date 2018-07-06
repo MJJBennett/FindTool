@@ -49,7 +49,7 @@ void index_words_r(const std::string& path, std::map<std::string, std::vector<wo
 
 std::string get_lower(std::string s) {
     //Found this great solution https://stackoverflow.com/questions/313970/how-to-convert-stdstring-to-lower-case
-    std::transform(s.begin(), s.end(), s.begin(), std::tolower);
+    std::transform(s.begin(), s.end(), s.begin(), ::tolower);
     return s;
 }
 
@@ -57,7 +57,7 @@ bool pgetline(std::string message, std::string& str) {
     //Purely a custom function for use in this program, prints a message, gets input, returns if the input is to quit
 	std::cout << message;
 	getline(std::cin, str);
-    auto str_cmd = get_lower(str); 
+    std::string str_cmd = get_lower(str); 
 	return !(str_cmd == "quit" || str_cmd=="exit" || str_cmd=="q"); 
 }
 
@@ -77,7 +77,7 @@ int main(int argc, char * argv[]) {
 	std::string inbuf;
 	while (pgetline("\nEnter a command: ", inbuf)) {
 		if (inbuf == "find") {
-			pgetline("\nWord to find: ", inbuf)
+			pgetline("\nWord to find: ", inbuf);
             auto itr = index.find(inbuf);
             if (itr == index.end()) {
                 std::cout << "\nWord not found. Sorry!";
